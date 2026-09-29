@@ -1,0 +1,26 @@
+{
+  "name": "@toolkit/app-__APP_ID__",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./manifest": "./src/manifest.ts",
+    "./ui": "./src/ui/index.tsx",
+    "./server": "./src/server/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@toolkit/ui": "workspace:*",
+    "@toolkit/utils": "workspace:*",
+    "hono": "catalog:",
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@toolkit/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "typescript": "catalog:"
+  }
+}

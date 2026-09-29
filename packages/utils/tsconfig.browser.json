@@ -1,0 +1,7 @@
+{
+  "extends": "@toolkit/tsconfig/react",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/browser.tsbuildinfo"
+  },
+  "include": ["src/index.ts", "src/browser.ts"]
+}

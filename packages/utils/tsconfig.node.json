@@ -1,0 +1,7 @@
+{
+  "extends": "@toolkit/tsconfig/node",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/node.tsbuildinfo"
+  },
+  "include": ["src/index.ts", "src/node.ts"]
+}

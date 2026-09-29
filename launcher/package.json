@@ -1,0 +1,35 @@
+{
+  "name": "@toolkit/launcher",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev:web": "vite",
+    "dev:server": "node --watch server/index.ts",
+    "build": "vite build",
+    "start": "node server/index.ts --static",
+    "typecheck": "tsc -b",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@hono/node-server": "catalog:",
+    "@toolkit/app-hello-world": "workspace:*",
+    "@toolkit/ui": "workspace:*",
+    "@toolkit/utils": "workspace:*",
+    "hono": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "@toolkit/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

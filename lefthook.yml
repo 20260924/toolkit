@@ -1,0 +1,18 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - run: pnpm exec oxfmt --check {staged_files}
+      glob: "*.{ts,tsx,js,json,jsonc,css,md,yml,yaml}"
+    - run: pnpm exec oxlint {staged_files}
+      glob: "*.{ts,tsx,js}"
+# turbo's TUI grabs the terminal and hangs inside git hooks, so force stream output.
+# Jobs run sequentially: concurrent turbo processes sharing a Windows console
+# clobber each other's console mode and stall.
+pre-push:
+  jobs:
+    - run: pnpm typecheck
+      env:
+        TURBO_UI: "false"
+    - run: pnpm test
+      env:
+        TURBO_UI: "false"

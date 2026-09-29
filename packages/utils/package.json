@@ -1,0 +1,19 @@
+{
+  "name": "@toolkit/utils",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./browser": "./src/browser.ts",
+    "./node": "./src/node.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -b"
+  },
+  "devDependencies": {
+    "@toolkit/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

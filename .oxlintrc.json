@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "react", "oxc", "import"],
+  "env": {
+    "browser": true
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "warn",
+    "style": "off"
+  },
+  "ignorePatterns": ["dist"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "error",
+    "import/no-cycle": "error",
+    "import/no-unassigned-import": ["error", { "allow": ["**/*.css"] }]
+  },
+  "overrides": [
+    {
+      "files": ["**/server/**", "scripts/**", "**/vite.config.ts", "packages/utils/src/node.ts"],
+      "env": {
+        "browser": false,
+        "node": true
+      }
+    }
+  ]
+}

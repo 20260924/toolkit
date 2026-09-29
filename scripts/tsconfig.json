@@ -1,0 +1,7 @@
+{
+  "extends": "@toolkit/tsconfig/node",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../node_modules/.tmp/scripts.tsbuildinfo"
+  },
+  "include": ["."]
+}

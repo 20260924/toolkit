@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/PretendardVariable.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Ubuntu Sans Mono";
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/ubuntu-sans-mono-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Ubuntu Sans Mono";
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/ubuntu-sans-mono-latin-ext-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+@font-face {
+  font-family: "Ubuntu Sans Mono";
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+  src: url("./fonts/ubuntu-sans-mono-latin-wght-italic.woff2") format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Ubuntu Sans Mono";
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+  src: url("./fonts/ubuntu-sans-mono-latin-ext-wght-italic.woff2") format("woff2-variations");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
+:root {
+  color-scheme: light dark;
+
+  --tk-canvas: #f5f3ec; /* page background */
+  --tk-surface: #fffdf6; /* raised areas: inputs, cards */
+  --tk-line: #d9ded4; /* borders, dividers */
+  --tk-ink: #142010; /* main text */
+  --tk-muted: #61705e; /* secondary text */
+  --tk-faint: #a1a396; /* hints, placeholders */
+  --tk-primary: #375b46; /* main action */
+  --tk-on-primary: #fffdf6; /* text on primary */
+  --tk-accent: #b86635; /* highlight, emphasis */
+  --tk-danger: #a4402c; /* errors */
+  --tk-focus: #d08045; /* focus ring */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tk-canvas: #1b211e;
+    --tk-surface: #232a26;
+    --tk-line: #34403a;
+    --tk-ink: #e4eae0;
+    --tk-muted: #98a698;
+    --tk-faint: #6d7a70;
+    --tk-primary: #8fbf9f;
+    --tk-on-primary: #16201a;
+    --tk-accent: #d98a55;
+    --tk-danger: #e07a64;
+    --tk-focus: #d08045;
+  }
+}
+
+@theme inline {
+  --color-canvas: var(--tk-canvas);
+  --color-surface: var(--tk-surface);
+  --color-line: var(--tk-line);
+  --color-ink: var(--tk-ink);
+  --color-muted: var(--tk-muted);
+  --color-faint: var(--tk-faint);
+  --color-primary: var(--tk-primary);
+  --color-on-primary: var(--tk-on-primary);
+  --color-accent: var(--tk-accent);
+  --color-danger: var(--tk-danger);
+  --color-focus: var(--tk-focus);
+
+  --font-sans: "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  --font-mono: "Ubuntu Sans Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}

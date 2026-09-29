@@ -1,0 +1,7 @@
+{
+  "extends": "@toolkit/tsconfig/node",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/server.tsbuildinfo"
+  },
+  "include": ["src/manifest.ts", "src/shared", "src/server"]
+}

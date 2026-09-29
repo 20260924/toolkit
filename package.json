@@ -1,0 +1,34 @@
+{
+  "name": "toolkit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev:web dev:server",
+    "start": "turbo run build --filter=@toolkit/launcher && pnpm --filter @toolkit/launcher start",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck && tsc -p scripts",
+    "test": "turbo run test",
+    "lint": "oxlint",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "check": "pnpm fmt:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "new": "node scripts/new-app.ts",
+    "drop": "node scripts/drop-app.ts",
+    "sync": "node scripts/sync-apps.ts",
+    "prepare": "lefthook install"
+  },
+  "devDependencies": {
+    "@toolkit/tsconfig": "workspace:*",
+    "@toolkit/utils": "workspace:*",
+    "@types/node": "catalog:",
+    "lefthook": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": "^24.21.0"
+  },
+  "packageManager": "pnpm@12.6.0"
+}
