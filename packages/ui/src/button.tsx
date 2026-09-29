@@ -4,6 +4,7 @@ import { cn } from "./cn.ts";
 
 const VARIANTS = {
   primary: "border-transparent bg-primary text-on-primary hover:opacity-90",
+  danger: "border-transparent bg-danger text-on-primary hover:opacity-90",
   outline: "border-line bg-surface text-ink hover:border-primary",
 } as const;
 
@@ -18,6 +19,17 @@ export function Button({ variant = "outline", type = "button", className, ...pro
         VARIANTS[variant],
         className,
       )}
+      {...props}
+    />
+  );
+}
+
+// Plain text that acts as a button, for inline row actions.
+export function TextButton({ type = "button", className, ...props }: ComponentProps<"button">) {
+  return (
+    <button
+      type={type}
+      className={cn("underline-offset-2 hover:underline", className)}
       {...props}
     />
   );

@@ -1,9 +1,9 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "@toolkit/ui/theme.css";
 
 /* Tailwind only scans the launcher by default; apps and shared UI live outside it. */
 @source "../../apps";
-@source "../../packages/ui/src";
+@source "../../packages";
 
 body {
   @apply bg-canvas font-sans text-ink antialiased;
