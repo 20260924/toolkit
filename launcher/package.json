@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@hono/node-server": "catalog:",
-    "@toolkit/app-hello-world": "workspace:*",
+    "@toolkit/app-pasteboard": "workspace:*",
+    "@toolkit/shell": "workspace:*",
     "@toolkit/ui": "workspace:*",
     "@toolkit/utils": "workspace:*",
     "hono": "catalog:",

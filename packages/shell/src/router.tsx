@@ -1,15 +1,18 @@
 import { useSyncExternalStore, type ComponentProps, type MouseEvent } from "react";
 
-export type Route = { page: "home" } | { page: "app"; id: string };
+export type Route = { page: "home" } | { page: "app"; id: string; rest: string[] };
 
-const APP_PATH = /^\/a\/([a-z0-9-]+)\/?$/;
+const APP_PATH = /^\/a\/([a-z0-9-]+)((?:\/[^/]+)*)\/?$/;
 
-function parse(pathname: string): Route {
-  const id = APP_PATH.exec(pathname)?.[1];
-  return id ? { page: "app", id } : { page: "home" };
+export function parsePath(pathname: string): Route {
+  const match = APP_PATH.exec(pathname);
+  if (!match?.[1]) return { page: "home" };
+  const rest = (match[2] ?? "").split("/").filter(Boolean).map(decodeURIComponent);
+  return { page: "app", id: match[1], rest };
 }
 
-export const appPath = (id: string) => `/a/${id}`;
+export const appPath = (id: string, ...rest: string[]) =>
+  ["/a", id, ...rest.map(encodeURIComponent)].join("/");
 
 // pushState does not fire popstate, so navigate() announces changes itself.
 const NAVIGATE_EVENT = "toolkit:navigate";
@@ -23,13 +26,20 @@ function subscribe(onChange: () => void) {
   };
 }
 
-export function useRoute(): Route {
-  return parse(useSyncExternalStore(subscribe, () => location.pathname));
+export function usePath(): Route {
+  return parsePath(useSyncExternalStore(subscribe, () => location.pathname));
 }
 
-export function navigate(path: string) {
+// The segments after /a/<id>, for apps with more than one screen.
+export function useAppPath(): string[] {
+  const route = usePath();
+  return route.page === "app" ? route.rest : [];
+}
+
+export function navigate(path: string, { replace = false } = {}) {
   if (location.pathname === path) return;
-  history.pushState(null, "", path);
+  if (replace) history.replaceState(null, "", path);
+  else history.pushState(null, "", path);
   dispatchEvent(new Event(NAVIGATE_EVENT));
 }
 

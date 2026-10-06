@@ -11,16 +11,22 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "@base-ui/react": "catalog:",
+    "@toolkit/shell": "workspace:*",
     "clsx": "catalog:",
+    "lucide-react": "catalog:",
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {
     "@toolkit/tsconfig": "workspace:*",
     "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "react": "catalog:",
+    "react-dom": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "react": "catalog:"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   }
 }

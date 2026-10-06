@@ -1,23 +1,21 @@
 {
-  "name": "@toolkit/app-hello-world",
+  "name": "@toolkit/shell",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
-    "./manifest": "./src/manifest.ts",
-    "./ui": "./src/ui/index.tsx"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "typecheck": "tsc -b"
   },
-  "dependencies": {
-    "@toolkit/ui": "workspace:*",
-    "@toolkit/utils": "workspace:*",
-    "react": "catalog:"
-  },
   "devDependencies": {
     "@toolkit/tsconfig": "workspace:*",
     "@types/react": "catalog:",
+    "react": "catalog:",
     "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:"
   }
 }
