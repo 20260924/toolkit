@@ -4,14 +4,12 @@ import { Hono } from "hono";
 
 import { API_PORT, HOST } from "./config.ts";
 import { localOnly } from "./guard.ts";
+import { BASE_URL, MARKER_HEADER, SHUTDOWN_PATH, isToolkitRunning } from "./instance.ts";
 import { openBrowser } from "./open-browser.ts";
 import { appServers } from "./registry.ts";
 
 const serveBuild = process.argv.includes("--static");
 const openOnStart = process.argv.includes("--open");
-
-// Lets a second launch tell a running toolkit apart from some other program on the port.
-const MARKER_HEADER = "x-toolkit";
 
 // Non-strict: /api/<id>/ and /api/<id> reach the same app route.
 const api = new Hono({ strict: false });
@@ -26,24 +24,29 @@ app.use(async (c, next) => {
 });
 app.route("/api", api);
 
+// Used by `pnpm stop`; a server started in the background has no window to close.
+app.post(SHUTDOWN_PATH, (c) => {
+  console.log("Shutting down.");
+  setTimeout(() => process.exit(0), 100);
+  return c.body(null, 204);
+});
+
 if (serveBuild) {
   app.use("*", serveStatic({ root: "./dist" }));
   app.get("*", serveStatic({ path: "./dist/index.html" }));
 }
 
-const url = `http://${HOST}:${API_PORT}`;
-
 const server = serve({ fetch: app.fetch, hostname: HOST, port: API_PORT }, () => {
   const what = serveBuild ? "toolkit" : "toolkit API";
-  console.log(`${what} listening on ${url}`);
-  if (openOnStart) openBrowser(url);
+  console.log(`${what} listening on ${BASE_URL}`);
+  if (openOnStart) openBrowser(BASE_URL);
 });
 
 server.on("error", async (error: NodeJS.ErrnoException) => {
   if (error.code !== "EADDRINUSE") throw error;
   if (await isToolkitRunning()) {
-    console.log(`toolkit is already running on ${url}.`);
-    if (openOnStart) openBrowser(url);
+    console.log(`toolkit is already running on ${BASE_URL}.`);
+    if (openOnStart) openBrowser(BASE_URL);
     process.exit(0);
   }
   console.error(
@@ -51,12 +54,3 @@ server.on("error", async (error: NodeJS.ErrnoException) => {
   );
   process.exit(1);
 });
-
-async function isToolkitRunning(): Promise<boolean> {
-  try {
-    const res = await fetch(`${url}/api`);
-    return res.headers.get(MARKER_HEADER) === "1";
-  } catch {
-    return false;
-  }
-}

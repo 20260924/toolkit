@@ -8,6 +8,8 @@
     "dev:server": "node --watch server/index.ts",
     "build": "vite build",
     "start": "node server/index.ts --static --open",
+    "launch": "node server/launch.ts",
+    "stop": "node server/stop.ts",
     "typecheck": "tsc -b",
     "test": "vitest run"
   },

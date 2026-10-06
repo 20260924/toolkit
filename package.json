@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "turbo run dev:web dev:server",
     "start": "turbo run build --filter=@toolkit/launcher && pnpm --filter @toolkit/launcher start",
+    "launch": "turbo run build --filter=@toolkit/launcher && pnpm --filter @toolkit/launcher launch",
+    "stop": "pnpm --filter @toolkit/launcher stop",
     "build": "turbo run build",
     "typecheck": "turbo run typecheck && tsc -p scripts",
     "test": "turbo run test",

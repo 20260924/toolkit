@@ -6,13 +6,15 @@
 
 ```sh
 pnpm install
-pnpm start   # 빌드 후 http://127.0.0.1:8850 을 브라우저로 엶
+pnpm launch  # 빌드 후 백그라운드로 띄우고 http://127.0.0.1:8850 을 브라우저로 엶
+pnpm stop    # 백그라운드 서버 끄기
+pnpm start   # launch와 같지만 터미널에서 포그라운드로 실행
 pnpm dev     # 개발 모드: http://127.0.0.1:8851 (Vite HMR + API 서버 watch)
 ```
 
 Node 24(`.node-version`)와 pnpm(`packageManager`, corepack)이 필요합니다.
 
-터미널 없이 켜려면 `toolkit.cmd`를 더블클릭합니다(바탕화면에 바로가기를 만들어 두면 편합니다). `pnpm start`와 같고, 창을 닫으면 서버가 꺼집니다. PATH에 pnpm이 없으면 fnm으로 Node를 활성화합니다. 이미 실행 중이면 브라우저만 엽니다.
+터미널 없이 켜려면 `toolkit.cmd`를, 끄려면 `toolkit-stop.cmd`를 더블클릭합니다(바탕화면에 바로가기를 만들어 두면 편합니다). 각각 `pnpm launch`, `pnpm stop`과 같고, 빌드하는 동안만 창이 보입니다. PATH에 pnpm이 없으면 fnm으로 Node를 활성화합니다. 이미 실행 중이면 브라우저만 엽니다. 백그라운드 서버의 출력은 `~/.toolkit/launcher/server.log`에 남습니다(마지막 실행분만).
 
 ## 명령
 
