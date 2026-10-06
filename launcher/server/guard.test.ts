@@ -4,11 +4,11 @@ import { describe, expect, it } from "vitest";
 import { isAllowedOrigin, isLocalHost, localOnly } from "./guard.ts";
 
 describe("isLocalHost", () => {
-  it.each(["localhost:4600", "127.0.0.1:4601", "[::1]:4600", "localhost"])("accepts %s", (host) => {
+  it.each(["localhost:8850", "127.0.0.1:8851", "[::1]:8850", "localhost"])("accepts %s", (host) => {
     expect(isLocalHost(host)).toBe(true);
   });
 
-  it.each([undefined, "", "evil.example:4600", "127.0.0.1.evil.example", "192.168.0.10:4600"])(
+  it.each([undefined, "", "evil.example:8850", "127.0.0.1.evil.example", "192.168.0.10:8850"])(
     "rejects %s",
     (host) => {
       expect(isLocalHost(host)).toBe(false);
@@ -22,8 +22,8 @@ describe("isAllowedOrigin", () => {
   });
 
   it("allows local origins on any port", () => {
-    expect(isAllowedOrigin("http://localhost:4601")).toBe(true);
-    expect(isAllowedOrigin("http://127.0.0.1:4600")).toBe(true);
+    expect(isAllowedOrigin("http://localhost:8851")).toBe(true);
+    expect(isAllowedOrigin("http://127.0.0.1:8850")).toBe(true);
   });
 
   it("rejects other sites and opaque origins", () => {
@@ -36,7 +36,7 @@ describe("localOnly", () => {
   const app = new Hono().use(localOnly()).post("/", (c) => c.text("ok"));
 
   it("passes local requests through", async () => {
-    const res = await app.request("http://127.0.0.1:4600/", { method: "POST" });
+    const res = await app.request("http://127.0.0.1:8850/", { method: "POST" });
     expect(res.status).toBe(200);
   });
 
@@ -46,15 +46,15 @@ describe("localOnly", () => {
   });
 
   it("checks the Host header over the URL", async () => {
-    const res = await app.request("http://127.0.0.1:4600/", {
+    const res = await app.request("http://127.0.0.1:8850/", {
       method: "POST",
-      headers: { host: "evil.example:4600" },
+      headers: { host: "evil.example:8850" },
     });
     expect(res.status).toBe(403);
   });
 
   it("blocks a cross-site origin", async () => {
-    const res = await app.request("http://127.0.0.1:4600/", {
+    const res = await app.request("http://127.0.0.1:8850/", {
       method: "POST",
       headers: { origin: "https://evil.example" },
     });

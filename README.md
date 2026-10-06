@@ -6,8 +6,8 @@
 
 ```sh
 pnpm install
-pnpm start   # 빌드 후 http://127.0.0.1:4600 을 브라우저로 엶
-pnpm dev     # 개발 모드: http://127.0.0.1:4601 (Vite HMR + API 서버 watch)
+pnpm start   # 빌드 후 http://127.0.0.1:8850 을 브라우저로 엶
+pnpm dev     # 개발 모드: http://127.0.0.1:8851 (Vite HMR + API 서버 watch)
 ```
 
 Node 24(`.node-version`)와 pnpm(`packageManager`, corepack)이 필요합니다.

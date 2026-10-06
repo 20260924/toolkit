@@ -59,5 +59,5 @@ await syncApps();
 
 console.log(`
 Created apps/${id}${values.server ? "" : " (no server)"}.
-  UI:     apps/${id}/src/ui/index.tsx     → http://127.0.0.1:4601/a/${id}  (pnpm dev)
+  UI:     apps/${id}/src/ui/index.tsx     → http://127.0.0.1:8851/a/${id}  (pnpm dev)
 ${values.server ? `  API:    apps/${id}/src/server/index.ts  → /api/${id}\n` : ""}  Edit the description in apps/${id}/src/manifest.ts.`);
