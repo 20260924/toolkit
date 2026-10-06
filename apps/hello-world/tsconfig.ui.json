@@ -1,7 +1,0 @@
-{
-  "extends": "@toolkit/tsconfig/react",
-  "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/ui.tsbuildinfo"
-  },
-  "include": ["src/manifest.ts", "src/shared", "src/ui"]
-}
