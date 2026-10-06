@@ -7,7 +7,7 @@
     "dev:web": "vite",
     "dev:server": "node --watch server/index.ts",
     "build": "vite build",
-    "start": "node server/index.ts --static",
+    "start": "node server/index.ts --static --open",
     "typecheck": "tsc -b",
     "test": "vitest run"
   },

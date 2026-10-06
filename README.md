@@ -6,11 +6,13 @@
 
 ```sh
 pnpm install
-pnpm start   # 빌드 후 http://127.0.0.1:4600
+pnpm start   # 빌드 후 http://127.0.0.1:4600 을 브라우저로 엶
 pnpm dev     # 개발 모드: http://127.0.0.1:4601 (Vite HMR + API 서버 watch)
 ```
 
 Node 24(`.node-version`)와 pnpm(`packageManager`, corepack)이 필요합니다.
+
+터미널 없이 켜려면 `toolkit.cmd`를 더블클릭합니다(바탕화면에 바로가기를 만들어 두면 편합니다). `pnpm start`와 같고, 창을 닫으면 서버가 꺼집니다. PATH에 pnpm이 없으면 fnm으로 Node를 활성화합니다. 이미 실행 중이면 브라우저만 엽니다.
 
 ## 명령
 

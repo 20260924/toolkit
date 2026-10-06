@@ -1,2 +1,4 @@
 * text=auto eol=lf
 *.woff2 binary
+# cmd.exe misparses LF-only batch files.
+*.cmd text eol=crlf
