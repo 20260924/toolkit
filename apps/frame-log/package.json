@@ -8,7 +8,8 @@
     "./ui": "./src/ui/index.tsx"
   },
   "scripts": {
-    "typecheck": "tsc -b"
+    "typecheck": "tsc -b",
+    "test": "vitest run"
   },
   "dependencies": {
     "@toolkit/ui": "workspace:*",
@@ -18,6 +19,7 @@
   "devDependencies": {
     "@toolkit/tsconfig": "workspace:*",
     "@types/react": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }
