@@ -32,3 +32,6 @@ export function formatTime(seconds: number): string {
 }
 
 export const IMAGE_FILE = /\.(png|jpe?g|webp|avif|gif|bmp)$/i;
+
+// 0001.webp → 0001
+export const stem = (fileName: string) => fileName.replace(/\.[^.]+$/, "");

@@ -280,6 +280,12 @@ importers:
       '@toolkit/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      idb:
+        specifier: 'catalog:'
+        version: 8.0.3
+      lucide-react:
+        specifier: 'catalog:'
+        version: 1.48.0(react@19.3.0)
       react:
         specifier: 'catalog:'
         version: 19.3.0
