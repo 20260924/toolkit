@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@hono/node-server": "catalog:",
+    "@toolkit/app-frame-log": "workspace:*",
     "@toolkit/app-pasteboard": "workspace:*",
     "@toolkit/shell": "workspace:*",
     "@toolkit/ui": "workspace:*",

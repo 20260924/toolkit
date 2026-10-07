@@ -272,6 +272,28 @@ importers:
         specifier: 'catalog:'
         version: 7.0.2
 
+  apps/frame-log:
+    dependencies:
+      '@toolkit/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@toolkit/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      react:
+        specifier: 'catalog:'
+        version: 19.3.0
+    devDependencies:
+      '@toolkit/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.3.0
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
+
   apps/pasteboard:
     dependencies:
       '@dnd-kit/core':
@@ -323,6 +345,9 @@ importers:
       '@hono/node-server':
         specifier: 'catalog:'
         version: 2.1.1(hono@4.13.9)
+      '@toolkit/app-frame-log':
+        specifier: workspace:*
+        version: link:../apps/frame-log
       '@toolkit/app-pasteboard':
         specifier: workspace:*
         version: link:../apps/pasteboard

@@ -1,0 +1,23 @@
+{
+  "name": "@toolkit/app-frame-log",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./manifest": "./src/manifest.ts",
+    "./ui": "./src/ui/index.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@toolkit/ui": "workspace:*",
+    "@toolkit/utils": "workspace:*",
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@toolkit/tsconfig": "workspace:*",
+    "@types/react": "catalog:",
+    "typescript": "catalog:"
+  }
+}
