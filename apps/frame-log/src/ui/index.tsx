@@ -1,13 +1,29 @@
-import { Button, HeaderRow, Hints, toast, useHotkeys, useListKeys } from "@toolkit/ui";
-import { FileText, FolderOpen } from "lucide-react";
+import {
+  Button,
+  HeaderRow,
+  Hints,
+  TextButton,
+  prompt,
+  toast,
+  useHotkeys,
+  useListKeys,
+} from "@toolkit/ui";
+import { createStorage } from "@toolkit/utils/browser";
+import { Download, FileText, FolderOpen } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getStates, putState, type FrameState } from "./db.ts";
+import { downloadZip } from "./export.ts";
 import { FRAME_COLUMNS, FrameRow } from "./frame-row.tsx";
 import { framesOf, loadFolder, loadTimes, useSession } from "./session.ts";
 import { stem } from "./times.ts";
 import { undoable } from "./undo.ts";
 import { Viewer } from "./viewer.tsx";
+
+import manifest from "../manifest.ts";
+
+const storage = createStorage(manifest.id);
+const DEFAULT_TITLE = "프레임 로그";
 
 const blank = (name: string): FrameState => ({ name, note: "", removed: false });
 
@@ -18,6 +34,7 @@ export default function App() {
   const [selectedName, setSelectedName] = useState<string | null>(null);
   const [viewing, setViewing] = useState(false);
   const [editingName, setEditingName] = useState<string | null>(null);
+  const [title, setTitle] = useState(() => storage.get("title", DEFAULT_TITLE));
   const folderInput = useRef<HTMLInputElement>(null);
   const timesInput = useRef<HTMLInputElement>(null);
 
@@ -57,6 +74,21 @@ export default function App() {
     });
   }
 
+  async function rename() {
+    const next = await prompt({ title: "문서 제목", defaultValue: title, confirmLabel: "변경" });
+    if (next === null || !next.trim()) return;
+    setTitle(next.trim());
+    storage.set("title", next.trim());
+  }
+
+  function download() {
+    if (visible.length === 0) return;
+    void downloadZip(
+      title,
+      visible.map((frame, index) => ({ frame, note: notes[index] ?? "" })),
+    );
+  }
+
   useListKeys({
     count: visible.length,
     selected,
@@ -67,6 +99,7 @@ export default function App() {
   useHotkeys({
     Delete: selected >= 0 && (() => void removeAt(selected)),
     m: selected >= 0 && (() => setEditingName(visible[selected]?.name ?? null)),
+    "mod+s": download,
   });
 
   return (
@@ -119,6 +152,15 @@ export default function App() {
             </span>
           )}
         </span>
+        <span className="flex items-center gap-3">
+          <TextButton onClick={() => void rename()} title="문서 제목 변경" className="text-muted">
+            {title}
+          </TextButton>
+          <Button variant="primary" disabled={visible.length === 0} onClick={download}>
+            <Download size={14} />
+            zip 내보내기
+          </Button>
+        </span>
       </div>
 
       {frames.length === 0 ? (
@@ -167,6 +209,7 @@ export default function App() {
           { keys: "m", label: "설명" },
           { keys: "del", label: "삭제" },
           { keys: "ctrl+z", label: "되돌리기" },
+          { keys: "ctrl+s", label: "zip", onClick: download },
         ]}
       />
 

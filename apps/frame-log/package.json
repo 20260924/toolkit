@@ -14,6 +14,7 @@
   "dependencies": {
     "@toolkit/ui": "workspace:*",
     "@toolkit/utils": "workspace:*",
+    "fflate": "catalog:",
     "idb": "catalog:",
     "lucide-react": "catalog:",
     "react": "catalog:"
