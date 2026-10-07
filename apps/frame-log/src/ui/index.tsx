@@ -35,6 +35,7 @@ export default function App() {
   const [viewing, setViewing] = useState(false);
   const [editingName, setEditingName] = useState<string | null>(null);
   const [title, setTitle] = useState(() => storage.get("title", DEFAULT_TITLE));
+  const [intro, setIntro] = useState(() => storage.get("intro", ""));
   const folderInput = useRef<HTMLInputElement>(null);
   const timesInput = useRef<HTMLInputElement>(null);
 
@@ -84,7 +85,7 @@ export default function App() {
   function download() {
     if (visible.length === 0) return;
     void downloadZip(
-      title,
+      { title, intro },
       visible.map((frame, index) => ({ frame, note: notes[index] ?? "" })),
     );
   }
@@ -162,6 +163,17 @@ export default function App() {
           </Button>
         </span>
       </div>
+
+      <textarea
+        value={intro}
+        onChange={(event) => {
+          setIntro(event.target.value);
+          storage.set("intro", event.target.value);
+        }}
+        placeholder="문서 설명: 내보낸 문서의 제목 아래에 들어갑니다"
+        rows={3}
+        className="mb-4 block w-full resize-y rounded-md border border-line bg-surface px-3 py-2 font-sans text-ink outline-none placeholder:text-faint focus:border-primary"
+      />
 
       {frames.length === 0 ? (
         <button

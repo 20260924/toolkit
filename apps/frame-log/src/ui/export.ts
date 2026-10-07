@@ -3,8 +3,6 @@ import { strToU8, zipSync, type Zippable } from "fflate";
 import { renderDocument } from "./document.ts";
 import type { Frame } from "./session.ts";
 
-const pad2 = (n: number) => String(n).padStart(2, "0");
-
 // Keeps a title usable as a file name on Windows and macOS.
 export function safeFileName(name: string): string {
   // oxlint-disable-next-line no-control-regex
@@ -13,11 +11,13 @@ export function safeFileName(name: string): string {
 }
 
 // <title>.zip holding index.html and assets/ with the kept frames, in list order.
-export async function downloadZip(title: string, frames: { frame: Frame; note: string }[]) {
-  const now = new Date();
+export async function downloadZip(
+  { title, intro }: { title: string; intro: string },
+  frames: { frame: Frame; note: string }[],
+) {
   const html = renderDocument({
     title,
-    exportedAt: `${now.getFullYear()}-${pad2(now.getMonth() + 1)}-${pad2(now.getDate())}`,
+    intro,
     frames: frames.map(({ frame, note }) => ({
       src: `assets/${frame.name}`,
       time: frame.time,

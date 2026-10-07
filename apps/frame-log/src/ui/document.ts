@@ -33,8 +33,8 @@ body {
   font: 15px/1.6 "Malgun Gothic", system-ui, sans-serif;
 }
 main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; }
-h1 { margin: 0 0 4px; font-size: 24px; }
-.meta { margin: 0 0 24px; color: var(--muted); font-size: 13px; }
+h1 { margin: 0 0 8px; font-size: 24px; }
+.intro { margin: 0 0 24px; color: var(--muted); white-space: pre-wrap; overflow-wrap: anywhere; }
 ol { list-style: none; margin: 0; padding: 0; }
 li {
   display: grid; grid-template-columns: 320px 4.5em minmax(0, 1fr); gap: 16px;
@@ -105,12 +105,13 @@ addEventListener("keydown", (event) => {
 
 export function renderDocument({
   title,
+  intro,
   frames,
-  exportedAt,
 }: {
   title: string;
+  // The author's own words under the title; left out when empty.
+  intro: string;
   frames: DocumentFrame[];
-  exportedAt: string;
 }): string {
   const rows = frames.map(({ src, time, note }) => {
     const shown = time === null ? "" : formatTime(time);
@@ -133,8 +134,12 @@ export function renderDocument({
 <body>
 <main>
 <h1>${escapeHtml(title)}</h1>
-<p class="meta">프레임 ${frames.length}개 · ${escapeHtml(exportedAt)} 내보냄 · 썸네일을 누르면 원본 크기로 봅니다</p>
-<ol>
+${
+  intro.trim()
+    ? `<p class="intro">${escapeHtml(intro.trim())}</p>
+`
+    : ""
+}<ol>
 ${rows.join("\n")}
 </ol>
 </main>

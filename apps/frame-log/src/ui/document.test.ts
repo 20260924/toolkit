@@ -13,7 +13,7 @@ describe("escapeHtml", () => {
 describe("renderDocument", () => {
   const html = renderDocument({
     title: "설치 <절차>",
-    exportedAt: "2026-10-07",
+    intro: "  설치파일 제작 절차.\n<녹화> 기준  ",
     frames: [
       { src: "assets/0001.webp", time: 9.47, note: "VB 5.0 실행\n<프로젝트> 열기" },
       { src: "assets/0040.webp", time: null, note: "" },
@@ -25,7 +25,16 @@ describe("renderDocument", () => {
     expect(html).toContain("<time>00:09</time>");
     expect(html).toContain("VB 5.0 실행\n&lt;프로젝트&gt; 열기");
     expect(html).toContain("<title>설치 &lt;절차&gt;</title>");
-    expect(html).toContain("프레임 2개");
+  });
+
+  it("puts the author's intro under the title", () => {
+    expect(html).toContain('<p class="intro">설치파일 제작 절차.\n&lt;녹화&gt; 기준</p>');
+    expect(html).not.toContain("내보냄");
+  });
+
+  it("leaves the intro out when empty", () => {
+    const bare = renderDocument({ title: "t", intro: "  ", frames: [] });
+    expect(bare).not.toContain('class="intro"');
   });
 
   it("loads nothing from the network", () => {
